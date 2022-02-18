@@ -1,5 +1,9 @@
 const teamContainer = document.querySelector('.team-container');
 console.log(teamContainer);
+const inputName = document.getElementById('name');
+const inputRole = document.getElementById('role');
+const inputImage = document.getElementById('image');
+const addButton = document.getElementById('addMemberButton');
 
 // Array di oggetti
 const team = [
@@ -49,23 +53,23 @@ team.push(newMember('New Member', 'Data Analyst', 'img/new-team-member-03.jpg'))
 team.push(newMember('New Member', 'Chief Financial Officer', 'img/new-team-member-04.jpg'));
 console.log(team);
 
-
-for(let i = 0; i < team.length; i++){
-  // ad ogni giro salvo in una costante gli oggetti in posizione i 
+// ciclo per inserire i membri nell'html in cui ad ogni giro:
+  //- salvo in una variabile gli oggetti in posizione i 
+  //- uso lafunzione che inserisce nell'html i membri del team
+for(let i = 0; i < team.length; i++){ 
   const teamMember = team[i]; 
 
-  //creo una card usando la funzione apposita, passandole la costante teamMember
-  const teamCard = newCard(teamMember); 
-
-  //inserisco la teamCard nel teamContainer in HTML
-  teamContainer.innerHTML += `${teamCard}`;
-  console.log(teamContainer);
+  printMember (teamMember);
 }
 
+// quando clicco sul bottone add inserisco una nuova persona usando la funzione che ho creato apposta
+addButton.addEventListener('click', function(){
+  addNewMember ();
+})
 
-//funzione che crea un nuovo oggetto e mi ritorna il nuovo oggetto
+
+//funzione che crea un nuovo oggetto e mi ritorna il nuovo oggetto ------------
 function newMember(nome, ruolo, foto) {
-
   // creo un nuovo oggetto
   const teamMember = {
       name: nome,
@@ -76,8 +80,7 @@ function newMember(nome, ruolo, foto) {
   return teamMember;
 }
 
-
-// funzione per inserire gli ogetti nell'html
+// funzione per inserire gli ogetti nell'html ------------
 function newCard(teamMember) {
     const name = teamMember.name; 
     const role = teamMember.role;
@@ -94,7 +97,34 @@ function newCard(teamMember) {
                     <p>${role}</p>
                 </div>
             </div>`;   
-  }
+}
+
+//funzione che inserisce nell'html i membri del team ------------
+function printMember (teamMember) {
+  //creo una card usando la funzione apposita e passandole la costante teamMember
+  const teamCard = newCard(teamMember); 
+
+  //inserisco la teamCard nel teamContainer in HTML
+  teamContainer.innerHTML += `${teamCard}`;
+  console.log(teamContainer);
+}
+
+//funzione che legge gli input dal form e aggiunge un nuovo membro ------------
+function addNewMember () {
+  // Usando .value prendo in valori che vengono inseriti nel form - The value property contains the default value OR the value a user types in (or a value set by a script). 
+  const name = inputName.value;
+  const role = inputRole.value;
+  const image = inputImage.value;
+
+  // creo un nuovo oggetto inserendo i nuovi dati nell'array di oggetti usado la funzione apposita
+  const newTeamMember = newMember(name, role, image);
+
+  // creo una nuova card con i dati del nuovo membro
+  newCard(newTeamMember);
+
+  // stampo nell'html
+  printMember (newTeamMember);
+}
 
 
 
