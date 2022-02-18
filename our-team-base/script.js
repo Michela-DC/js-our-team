@@ -47,8 +47,58 @@ team.push(newMember('New Member', 'Marketing Manager', 'img/new-team-member-01.j
 team.push(newMember('New Member', 'Project Manager', 'img/new-team-member-02.jpg'));
 team.push(newMember('New Member', 'Data Analyst', 'img/new-team-member-03.jpg'));
 team.push(newMember('New Member', 'Chief Financial Officer', 'img/new-team-member-04.jpg'));
-console.log(team)
+console.log(team);
 
+
+for(let i = 0; i < team.length; i++){
+  // ad ogni giro salvo in una costante gli oggetti in posizione i 
+  const teamMember = team[i]; 
+
+  //creo una card usando la funzione apposita, passandole la costante teamMember
+  const teamCard = newCard(teamMember); 
+
+  //inserisco la teamCard nel teamContainer in HTML
+  teamContainer.innerHTML += `${teamCard}`;
+  console.log(teamContainer);
+}
+
+
+//funzione che crea un nuovo oggetto e mi ritorna il nuovo oggetto
+function newMember(nome, ruolo, foto) {
+
+  // creo un nuovo oggetto
+  const teamMember = {
+      name: nome,
+      role: ruolo,
+      image: foto,
+  }
+
+  return teamMember;
+}
+
+
+// funzione per inserire gli ogetti nell'html
+function newCard(teamMember) {
+    const name = teamMember.name; 
+    const role = teamMember.role;
+    const image = teamMember.image;
+
+    return `<div class="team-card">
+                <div class="card-image">
+                    <img
+                        src="${image}" 
+                    />
+                </div>
+                <div class="card-text">
+                    <h3>${name}</h3>
+                    <p>${role}</p>
+                </div>
+            </div>`;   
+  }
+
+
+
+/*
 // Creo un ciclo for che cicla dentro l'array di oggetti
 for(let i = 0; i < team.length; i++){
     // creo la team card 
@@ -66,23 +116,8 @@ for(let i = 0; i < team.length; i++){
 
     //inserisco la teamCard nel teamContainer in HTML
     teamContainer.innerHTML += `${teamCard}`;   
-}
+} 
 //Dentro al ciclo for quando scrivo team[i].image --> con team[i] prendo la posizione dell'array e con .image dico quale proprietà, di quella data posizione di team, voglio vedere
 
 console.log(teamContainer);
-
-//funzione che crea un nuovo oggetto e mi ritorna il nuovo oggetto
-function newMember(nome, ruolo, foto) {
-    // creo un nuovo oggetto
-    const member = {
-        name: nome,
-        role: ruolo,
-        image: foto,
-    }
-
-    return member;
-}
-
-
-
-
+*/
