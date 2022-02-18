@@ -116,6 +116,14 @@ function addNewMember () {
   const role = inputRole.value;
   const image = inputImage.value;
 
+  //controllo se il form è stato compilato correttamente, quindi se anche solo uno dei campi è vuoto allora compare un alert per avvisare l'utente
+  if ( !name || !role || !image){
+    alert('Attention! The form was not filled in corretly... Try Again!');
+    return;
+    // invece che fare un else con dentro tutto il resto del codice metto un return perchè il codice dopo il return non viene eseguito, 
+    // in questo modo se si entra dentro l'if poi il resto del codice non viene esguito e quindi non viene inserito niente nell'html
+  }
+
   // creo un nuovo oggetto inserendo i nuovi dati nell'array di oggetti usado la funzione apposita
   const newTeamMember = newMember(name, role, image);
 
